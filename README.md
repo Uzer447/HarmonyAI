@@ -1,26 +1,26 @@
-<div align="center">
-  <img src="https://storage.googleapis.com/hume-public-logos/hume/hume-banner.png">
-  <h1>EVI Next.js App Router Example</h1>
-</div>
+# Harmony - Your Personal AI Therapist
 
-![preview.png](preview.png)
+Harmony is an AI-powered therapist designed to provide personalized mental health support and guidance. This project leverages AI to offer meaningful conversations, emotional assistance, and self-improvement insights.
 
-## Overview
+## Features
+- AI-driven therapy sessions
+- Personalized mental health insights
+- Secure and confidential conversations
+- Multi-platform accessibility
+- Light and dark mode support
 
-This project features a sample implementation of Hume's [Empathic Voice Interface](https://hume.docs.buildwithfern.com/docs/empathic-voice-interface-evi/overview) using Hume's React SDK. Here, we have a simple EVI that uses the Next.js App Router.
+## Technologies Used
+- **React & Next.js**: For the frontend
+- **Node.js & Express**: For the backend
+- **MongoDB**: For secure data storage
+- **OpenAI API**: For AI-driven responses
+- **Tailwind CSS**: For styling
 
-## Project deployment
+## Usage
+- Sign up or log in to access personalized therapy sessions.
+- Engage in conversations with the AI therapist.
+- Track your emotional progress over time.
 
-Click the button below to deploy this example project with Vercel:
+## Contributing
+If you'd like to contribute, fork the repository and submit a pull request. Contributions are welcome!
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhumeai%2Fhume-evi-next-js-starter&env=HUME_API_KEY,HUME_SECRET_KEY)
-
-Below are the steps to completing deployment:
-
-1. Create a Git Repository for your project.
-2. Provide the required environment variables. To get your API key and Client Secret key, log into the portal and visit the [API keys page](https://beta.hume.ai/settings/keys).
-
-## Support
-
-If you have questions, require assistance, or wish to engage in discussions pertaining to this starter template, [please reach out to us on Discord](https://link.hume.ai/discord).
-# HarmonyAI
