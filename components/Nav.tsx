@@ -7,7 +7,7 @@ import { Moon, Sun } from "lucide-react";
 import pkg from '@/package.json';
 
 export const Nav = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   useLayoutEffect(() => {
     const el = document.documentElement;
