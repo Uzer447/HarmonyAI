@@ -1,26 +1,33 @@
 "use client";
+
 import { cn } from "@/utils";
 import { useVoice } from "@humeai/voice-react";
 import Expressions from "./Expressions";
-import { AnimatePresence, motion } from "framer-motion";
-import { ComponentRef, forwardRef } from "react";
+import { AnimatePresence, motion, HTMLMotionProps } from "framer-motion";
+import { forwardRef } from "react";
 
-const Messages = forwardRef<
-  ComponentRef<typeof motion.div>,
-  Record<never, never>
->(function Messages(_, ref) {
+interface MessagesProps extends HTMLMotionProps<"div"> {
+  layoutScroll?: boolean;
+}
+
+const Messages = forwardRef<HTMLDivElement, MessagesProps & { className?: string }>(function Messages(
+  { layoutScroll, className, ...props },
+  ref
+) {
   const { messages } = useVoice();
 
   return (
     <motion.div
-      layoutScroll
-      className={"grow rounded-md overflow-auto p-4"}
-      ref={ref}
-    >
+    layoutScroll={layoutScroll}
+    ref={ref}
+    {...props} 
+    className={cn("grow rounded-md overflow-auto p-4", className)}
+  >
       <motion.div
-        className={"max-w-2xl mx-auto w-full flex flex-col gap-4 pb-24"}
+        className="max-w-2xl mx-auto w-full flex flex-col gap-4 pb-24"
+        layout
       >
-        <AnimatePresence mode={"popLayout"}>
+        <AnimatePresence mode="popLayout">
           {messages.map((msg, index) => {
             if (
               msg.type === "user_message" ||
@@ -35,32 +42,21 @@ const Messages = forwardRef<
                     "border border-border rounded",
                     msg.type === "user_message" ? "ml-auto" : ""
                   )}
-                  initial={{
-                    opacity: 0,
-                    y: 10,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    y: 0,
-                  }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 0 }}
+                  tabIndex={msg.type === "user_message" ? 0 : undefined}
+                  role={msg.type === "assistant_message" ? "assistant" : undefined}
+                  layout
                 >
-                  <div
-                    className={cn(
-                      "text-xs capitalize font-medium leading-none opacity-50 pt-4 px-3"
-                    )}
-                  >
+                  <div className="text-xs capitalize font-medium leading-none opacity-50 pt-4 px-3">
                     {msg.message.role}
                   </div>
-                  <div className={"pb-3 px-3"}>{msg.message.content}</div>
+                  <div className="pb-3 px-3">{msg.message.content}</div>
                   <Expressions values={{ ...msg.models.prosody?.scores }} />
                 </motion.div>
               );
             }
-
             return null;
           })}
         </AnimatePresence>

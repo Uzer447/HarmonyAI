@@ -4,7 +4,7 @@ import { VoiceProvider } from "@humeai/voice-react";
 import Messages from "./Messages";
 import Controls from "./Controls";
 import StartCall from "./StartCall";
-import { ComponentRef, useRef } from "react";
+import { useRef } from "react";
 
 export default function ClientComponent({
   accessToken,
@@ -12,9 +12,9 @@ export default function ClientComponent({
   accessToken: string;
 }) {
   const timeout = useRef<number | null>(null);
-  const ref = useRef<ComponentRef<typeof Messages> | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null); // 🛠 correct type
 
-  const configId = process.env['NEXT_PUBLIC_HUME_CONFIG_ID'];
+  const configId = process.env.NEXT_PUBLIC_HUME_CONFIG_ID;
 
   return (
     <div className="relative grow flex flex-col mx-auto w-full h-screen overflow-hidden">
@@ -27,7 +27,7 @@ export default function ClientComponent({
           }
 
           timeout.current = window.setTimeout(() => {
-            if (ref.current && typeof ref.current.scrollTo === "function") {
+            if (ref.current) {
               ref.current.scrollTo({
                 top: ref.current.scrollHeight,
                 behavior: "smooth",
