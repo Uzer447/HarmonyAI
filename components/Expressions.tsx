@@ -1,9 +1,16 @@
 "use client";
 import { expressionColors, isExpressionColor } from "@/utils/expressionColors";
 import { expressionLabels } from "@/utils/expressionLabels";
-import { motion } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 import { CSSProperties } from "react";
 import * as R from "remeda";
+
+// Extend the type of motion.div to include className properly
+type MotionDivProps = MotionProps & React.HTMLProps<HTMLDivElement> & {
+  className?: string;
+};
+
+const MotionDiv = motion.div as React.FC<MotionDivProps>;
 
 export default function Expressions({
   values,
@@ -49,7 +56,7 @@ export default function Expressions({
                 "absolute top-0 left-0 size-full rounded-full opacity-10 bg-[var(--bg)]"
               }
             />
-            <motion.div
+            <MotionDiv
               className={
                 "absolute top-0 left-0 h-full bg-[var(--bg)] rounded-full"
               }
