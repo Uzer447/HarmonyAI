@@ -14,29 +14,22 @@ export default function ClientComponent({
   const timeout = useRef<number | null>(null);
   const ref = useRef<ComponentRef<typeof Messages> | null>(null);
 
-  // optional: use configId from environment variable
   const configId = process.env['NEXT_PUBLIC_HUME_CONFIG_ID'];
-  
+
   return (
-    <div
-      className={
-        "relative grow flex flex-col mx-auto w-full overflow-hidden h-[0px]"
-      }
-    >
+    <div className="relative grow flex flex-col mx-auto w-full h-screen overflow-hidden">
       <VoiceProvider
         auth={{ type: "accessToken", value: accessToken }}
         configId={configId}
         onMessage={() => {
           if (timeout.current) {
-            window.clearTimeout(timeout.current);
+            clearTimeout(timeout.current);
           }
 
           timeout.current = window.setTimeout(() => {
-            if (ref.current) {
-              const scrollHeight = ref.current.scrollHeight;
-
+            if (ref.current && typeof ref.current.scrollTo === "function") {
               ref.current.scrollTo({
-                top: scrollHeight,
+                top: ref.current.scrollHeight,
                 behavior: "smooth",
               });
             }
